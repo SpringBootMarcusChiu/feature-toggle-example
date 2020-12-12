@@ -1,7 +1,9 @@
 package com.marcuschiu.Feature.Toggle.Example;
-//    @FeatureToggle(ScheduledPollerFT.class)
-import com.marcuschiu.Feature.Toggle.Example.feature.toggle.FeatureToggle;
-import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.ScheduledPollerFT;
+
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.annotation.FeatureToggle;
+
+//@FeatureToggle(FT.SCHEDULED_POLLER)
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.ScheduledPollerFeature;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -15,6 +17,7 @@ public class FeatureToggleExampleApplication {
         SpringApplication.run(FeatureToggleExampleApplication.class, args);
     }
 
+    @FeatureToggle(ScheduledPollerFeature.class)
     @Scheduled(cron = "*/1 * * * * *")
     public void schedule1() {
         System.out.println("Hello, World! " + System.currentTimeMillis() / 1000);

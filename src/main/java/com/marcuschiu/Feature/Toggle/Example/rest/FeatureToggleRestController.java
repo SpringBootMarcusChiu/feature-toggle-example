@@ -1,20 +1,21 @@
 package com.marcuschiu.Feature.Toggle.Example.rest;
 
-import com.marcuschiu.Feature.Toggle.Example.feature.toggle.FeatureToggle;
-import com.marcuschiu.Feature.Toggle.Example.feature.toggle.FeatureToggleAspect;
-import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.RestApiFT;
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.FeatureService;
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.annotation.FeatureToggle;
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.annotation.FeatureToggleAspect;
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.RestApiFeature;
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.ScheduledPollerFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FeatureToggleRestController {
 
     @Autowired
-    FeatureToggleAspect featureToggleAspect;
+    FeatureService featureService;
 
-    @FeatureToggle(RestApiFT.class)
+    @FeatureToggle(RestApiFeature.class)
     @GetMapping("/")
     public String main() {
         return "hello world";
@@ -22,11 +23,11 @@ public class FeatureToggleRestController {
 
     @GetMapping("/toggle-scheduled-poller")
     public void toggleScheduledPoller() {
-        featureToggleAspect.toggleScheduledPollerEnabled();
+        featureService.toggleFeature(ScheduledPollerFeature.class);
     }
 
     @GetMapping("/toggle-rest-api")
     public void toggleRestApi() {
-        featureToggleAspect.toggleRestApiEnabled();
+        featureService.toggleFeature(RestApiFeature.class);
     }
 }

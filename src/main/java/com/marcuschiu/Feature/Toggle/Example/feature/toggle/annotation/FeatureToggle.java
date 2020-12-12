@@ -1,6 +1,6 @@
-package com.marcuschiu.Feature.Toggle.Example.feature.toggle;
+package com.marcuschiu.Feature.Toggle.Example.feature.toggle.annotation;
 
-import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.FTI;
+import com.marcuschiu.Feature.Toggle.Example.feature.toggle.features.FeatureI;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FeatureToggle {
-    public Class<? extends FTI> value();
+    public Class<? extends FeatureI> value();
 }
